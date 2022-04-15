@@ -1,0 +1,103 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.7.33",
+        "version" : "2.0"
+    },
+    "extensionsUsed" : [
+        "KHR_draco_mesh_compression"
+    ],
+    "extensionsRequired" : [
+        "KHR_draco_mesh_compression"
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Table01",
+            "scale" : [
+                0.9803920388221741,
+                1,
+                0.9803921580314636
+            ]
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cylinder.012",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "extensions" : {
+                        "KHR_draco_mesh_compression" : {
+                            "bufferView" : 0,
+                            "attributes" : {
+                                "POSITION" : 0,
+                                "NORMAL" : 1,
+                                "TEXCOORD_0" : 2
+                            }
+                        }
+                    },
+                    "indices" : 3,
+                    "mode" : 4
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "componentType" : 5126,
+            "count" : 394,
+            "max" : [
+                1.0200001001358032,
+                1,
+                1.0199999809265137
+            ],
+            "min" : [
+                -1.0200001001358032,
+                0,
+                -1.0200001001358032
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "componentType" : 5126,
+            "count" : 394,
+            "type" : "VEC3"
+        },
+        {
+            "componentType" : 5126,
+            "count" : 394,
+            "type" : "VEC2"
+        },
+        {
+            "componentType" : 5123,
+            "count" : 1242,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 2721,
+            "byteOffset" : 0
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 2724,
+            "uri" : "data:application/octet-stream;base64,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"
+        }
+    ]
+}
