@@ -1,13 +1,15 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import './scene.css'
 
-import { Box, FirstPersonControls, OrbitControls, PointerLockControls, useGLTF } from '@react-three/drei';
+
+import { ControlLockContext } from '../global-context/global-context';
+
 import Movement from '../movement/movement';
 import ShopLuxe from '../../models /shop_luxe';
-import Shelf from '../../models /shelf01';
-import Table from '../../models /table';
 import Product from '../product / product';
-import { Suspense } from 'react';
+import { Suspense, useContext } from 'react';
+import { Plane } from '@react-three/drei';
+import { MeshBasicMaterial, TextureLoader } from 'three';
 
 // Position Helpers
 const shopWidth = 12;
@@ -258,15 +260,23 @@ switch (productCount) {
 
 
 
-function Scene() {
+function Scene(props) {
+
+    const { isLocked, setLocked } = useContext(ControlLockContext)
+
+    const brandLogo = useLoader(TextureLoader, props.brandLogo);
+
+    const brandMaterial = new MeshBasicMaterial();
+    brandMaterial.map = brandLogo;
+    brandMaterial.transparent = true;
+
+
     return (
         
         <Canvas>
             {/* <OrbitControls /> */}
             {/* <PointerLockControls /> */}
-            <Movement />
-
-            <pointLight position={[0, -1, 6]} intensity={0.1}/>
+            <Movement isLocked={isLocked} setLocked={setLocked} />
             
             {boxConfiguration.map((slotPosition, index) => {
                 return (
@@ -279,6 +289,8 @@ function Scene() {
                     />
                 )
             })}
+
+            <Plane args={[3, 3]} material={brandMaterial} position={[0, 3, -shopDepth / 2 + 0.1]} />
 
             <Suspense fallback={null}>
                 <ShopLuxe />

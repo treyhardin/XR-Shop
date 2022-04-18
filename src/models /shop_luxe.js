@@ -32,9 +32,11 @@ export default function ShopLuxe(props) {
   material.roughnessMap = roughnessTexture;
   material.normalMap = normalTexture;
   material.emissiveMap = emissionTexture;
-  material.emissiveIntensity = 2;
+  material.emissiveIntensity = 1;
   material.lightMap = lightmap;
+  material.lightMapIntensity = 1;
   material.metalness = 0;
+  material.receiveShadow = true;
 
   console.log(material)
 
@@ -45,6 +47,8 @@ export default function ShopLuxe(props) {
         receiveShadow
         geometry={nodes.ShopLuxe.geometry}
         material={nodes.ShopLuxe.material}
+        name={'shop-mesh'}
+        layers={2}
       />
     </group>
   );

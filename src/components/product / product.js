@@ -1,5 +1,5 @@
-import { useGLTF } from "@react-three/drei";
-import { Suspense, useRef, useMemo } from "react";
+import { SpotLight, useGLTF } from "@react-three/drei";
+import { Suspense, useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 
@@ -14,6 +14,7 @@ function Product(props) {
     const { scene } = useGLTF(props.product)
     const modelInstance = useMemo(() => scene.clone(), [scene])
     const productGroup = useRef(null);
+    // const spotLight = useRef(null);
     const floatHeight = 0.1;
 
     useFrame(() => {
@@ -23,9 +24,21 @@ function Product(props) {
         }
     })
 
+    useEffect(() => {
+        // spotLight.current.target = productGroup.current;
+    })
+
 
     return (
-        <group position={props.position} rotation={[0, props.rotation, 0]} >
+        <group position={props.position} rotation={[0, props.rotation, 0]} name={'product-group'} layers={1}>
+            {/* <SpotLight 
+                distance={5}
+                angle={0.15}
+                attenuation={5}
+                anglePower={5}
+                ref={spotLight}
+                position={[0, 2, 0]}
+            /> */}
             {props.model == 'table' &&
                 <Table />
             }
@@ -33,7 +46,7 @@ function Product(props) {
                 <Shelf />
             }
             <Suspense fallback={null}>
-                <primitive object={modelInstance} position={[0, 1 + floatHeight, 0]} ref={productGroup} />
+                <primitive object={modelInstance} position={[0, 1 + floatHeight, 0.25]} ref={productGroup} />
             </Suspense>
         </group>
     );
