@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { VRCanvas, DefaultXRControllers } from '@react-three/xr'
 import './scene.css'
-
 
 import { ControlLockContext } from '../global-context/global-context';
 
@@ -8,8 +8,10 @@ import Movement from '../movement/movement';
 import ShopLuxe from '../../models /shop_luxe';
 import Product from '../product / product';
 import { Suspense, useContext } from 'react';
-import { Plane } from '@react-three/drei';
+import { Plane, OrbitControls } from '@react-three/drei';
 import { MeshBasicMaterial, TextureLoader } from 'three';
+import { DirectionalLight } from 'three';
+
 
 // Position Helpers
 const shopWidth = 12;
@@ -81,73 +83,85 @@ const slotPositions = {
         position: [rightSide, 0, frontDepth],
         rotation: -Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     frontCenter: {
         position: [0, 0, midFrontDepth],
         rotation: 0,
         model: 'table',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     frontLeft: {
         position: [leftSide, 0, frontDepth],
         rotation: Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     midRight: {
         position: [rightSide, 0, 0],
         rotation: -Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     midCenter: {
         position: [0, 0, 0],
         rotation: 0,
         model: 'table',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     midLeft: {
         position: [leftSide, 0, 0],
         rotation: Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     rearRight: {
         position: [rightSide, 0, rearDepth],
         rotation: -Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     rearCenter: {
         position: [0, 0, midRearDepth],
         rotation: 0,
         model: 'table',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     rearLeft: {
         position: [leftSide, 0, rearDepth],
         rotation: Math.PI / 2,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     backRight: {
         position: [midRightSide, 0, backDepth],
         rotation: 0,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     backCenter: {
         position: [0, 0, backDepth],
         rotation: 0,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     },
     backLeft: {
         position: [midLefttSide, 0, backDepth],
         rotation: 0,
         model: 'shelf',
-        product: '/models/Shelf01.gltf'
+        product: '/models/Shelf01.gltf',
+        lightmap: '/textures/shelf/Lightmap_Shelf_FrontLeft.png'
     }
 }
 
@@ -273,10 +287,12 @@ function Scene(props) {
 
     return (
         
-        <Canvas>
+        <VRCanvas shadows={true}>
+            <DefaultXRControllers />
             {/* <OrbitControls /> */}
-            {/* <PointerLockControls /> */}
             <Movement isLocked={isLocked} setLocked={setLocked} />
+
+            <spotLight position={[0, 5, shopDepth]} castShadow intensity={0.1} />
             
             {boxConfiguration.map((slotPosition, index) => {
                 return (
@@ -286,6 +302,7 @@ function Scene(props) {
                         rotation={slotPosition.rotation} 
                         model={slotPosition.model} 
                         product={products[index].model}
+                        lightmap={slotPosition.lightmap}
                     />
                 )
             })}
@@ -296,7 +313,7 @@ function Scene(props) {
                 <ShopLuxe />
             </Suspense>
 
-        </Canvas>
+        </VRCanvas>
       );
 }
 

@@ -4,6 +4,7 @@ export const ControlLockContext = createContext({});
 
 export function ContextProvider({ children }) {
 
+    // Should be false
     const [ isLocked, setLocked ] = useState(false);
 
     function printText() {

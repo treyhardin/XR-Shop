@@ -10,6 +10,7 @@ import brandLogo from './brand_logo.png'
 
 export default function App() {
 
+
   return (
     <div className='App'>
       <ContextProvider>

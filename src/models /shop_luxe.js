@@ -34,11 +34,9 @@ export default function ShopLuxe(props) {
   material.emissiveMap = emissionTexture;
   material.emissiveIntensity = 1;
   material.lightMap = lightmap;
-  material.lightMapIntensity = 1;
+  material.lightMapIntensity = 0.5;
   material.metalness = 0;
   material.receiveShadow = true;
-
-  console.log(material)
 
   return (
     <group ref={group} {...props} dispose={null}>

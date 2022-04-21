@@ -37,7 +37,6 @@ function Menu(props) {
                     <label className='utility'>Device:</label>
                     <span className='devices-wrapper utility'>
                         <span className='device-item'>VR</span>
-                        <span className='device-item'>AR</span>
                         <span className='device-item active'>Web</span>
                     </span>
                 </span>
