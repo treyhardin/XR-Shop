@@ -46,7 +46,7 @@ export default function ShopLuxe(props) {
         geometry={nodes.ShopLuxe.geometry}
         material={nodes.ShopLuxe.material}
         name={'shop-mesh'}
-        layers={2}
+        // layers={[1, 2, 3]}
       />
     </group>
   );

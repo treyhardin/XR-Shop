@@ -1,5 +1,5 @@
 .menu {
-    /* background-color: var(--color-reverse); */
+    background-color: var(--color-reverse);
     color: var(--color-ink);
     position: absolute;
     top: 0;

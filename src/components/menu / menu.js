@@ -2,6 +2,7 @@ import { useCallback, useContext, useState } from 'react';
 import './menu.css';
 
 import { ControlLockContext } from '../global-context/global-context';
+import { useXR } from '@react-three/xr';
 
 function Menu(props) {
 
@@ -10,13 +11,31 @@ function Menu(props) {
         console.log('menu change')
     }, [isLocked])
 
+    const {device} = useXR();
+
+    const handleClick = () => {
+        // device.requestPresent([{source: renderer.domElement}]);
+        console.log(useXR)
+
+        if (props.vr) {
+            return navigator.xr.requestSession('immersive-vr').then((session) => {
+                navigator.xr.onSessionStarted(session);
+            })
+        }
+
+        return setLocked(true)
+    }
+
+    console.log(navigator.xr)
+
     return (
         <div className={`menu ${ isLocked && 'hidden'}`}>
             <div className='menu-title'>
                 <img src={props.brandLogo} className='brand-logo' />
                 <h1 className='title-text utility'>Spring/Summer 2022</h1>
-                <button onClick={() => setLocked(true)}>Enter the Store</button>
+                <button onClick={() => handleClick()}>Enter the Store</button>
             </div>
+            <p>{device}</p>
             <div className='menu-info'>
                 <span className='info-block'>
                     <label className='utility'>Controls:</label>
@@ -36,8 +55,8 @@ function Menu(props) {
                 <span className='info-block'>
                     <label className='utility'>Device:</label>
                     <span className='devices-wrapper utility'>
-                        <span className='device-item'>VR</span>
-                        <span className='device-item active'>Web</span>
+                        <span className={`device-item ${props.vr ? 'active' : ''}`}>VR</span>
+                        <span className={`device-item ${!props.vr ? 'active' : ''}`}>Web</span>
                     </span>
                 </span>
             </div>
