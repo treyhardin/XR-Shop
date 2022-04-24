@@ -8,6 +8,9 @@ import { Vector2, Vector3, Raycaster, ArrowHelper } from "three";
 
 function Movement(props) {
 
+    const { gl } = useThree();
+    const vrEnabled = gl.xr.isPresenting;
+
     const camera = useThree((state) => state.camera)
     camera.layers.enableAll();
     const scene = useThree((state) => state.scene)
